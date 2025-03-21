@@ -1,4 +1,1 @@
 streamlit==1.21.0
-pandas==2.2.1
-numpy==1.26.4
-time==3.9.9
