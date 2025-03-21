@@ -15,7 +15,43 @@ preguntas = [
      
     ("¿Qué método de enseñanza se basa en la exploración y el descubrimiento guiado?", 
      ["El aprendizaje por descubrimiento de Jerome Bruner.", "El método de enseñanza directa.",
-      "El aprendizaje cooperativo.", "El método Montessori."], 0)
+      "El aprendizaje cooperativo.", "El método Montessori."], 0),
+     
+    ("¿Qué es el aprendizaje significativo según David Ausubel?", 
+     ["Es el aprendizaje que se basa en la memorización.",
+      "Es aquel en el que el estudiante relaciona nuevos conocimientos con los que ya posee.",
+      "Es el aprendizaje que ocurre solo a través de la práctica.",
+      "Es el aprendizaje que se realiza en entornos virtuales."], 1),
+     
+    ("¿Cuál es el principal objetivo de la educación según la UNESCO?", 
+     ["Garantizar el acceso a la educación básica.",
+      "Garantizar el acceso a una educación de calidad, inclusiva y equitativa para todos.",
+      "Proveer formación para trabajos específicos.",
+      "Enseñar a los estudiantes sobre el patrimonio cultural."], 1),
+     
+    ("¿Qué tipo de aprendizaje fomenta la teoría de Jean Piaget?", 
+     ["Aprendizaje por descubrimiento.",
+      "Aprendizaje colaborativo.",
+      "Aprendizaje constructivista basado en el desarrollo cognitivo del niño.",
+      "Aprendizaje basado en competencias."], 2),
+     
+    ("¿Qué es la educación inclusiva?", 
+     ["Es un modelo educativo que se centra solo en los estudiantes con discapacidad.",
+      "Es un modelo educativo que busca garantizar el aprendizaje de todos los estudiantes, sin exclusión.",
+      "Es un enfoque que solo acepta a estudiantes con altos logros académicos.",
+      "Es una metodología educativa para estudiantes adultos."], 1),
+     
+    ("¿Cuál es la diferencia entre enseñanza y aprendizaje?", 
+     ["La enseñanza es el proceso de transmitir conocimientos, mientras que el aprendizaje es la adquisición de los mismos.",
+      "La enseñanza es la actividad realizada por los alumnos, mientras que el aprendizaje es el proceso que llevan a cabo los maestros.",
+      "La enseñanza es más importante que el aprendizaje.",
+      "No hay diferencia entre enseñanza y aprendizaje."], 0),
+
+    ("¿Cuál?", 
+     ["La enseñanza es el proceso de transmitir conocimientos, mientras qrendizaje es la adquisición de los mismos.",
+      "La enseñanza es la actividad realizada por los alumnos,  el aprendizaje es el proceso que llevan a cabo los maestros.",
+      "La enseñanza es más importante rendizaje.",
+      "No hay diferencia entre enseñanzaprendizaje."], 3)
 ]
 
 # Lista de planteles
@@ -59,16 +95,20 @@ if pantalla_anterior != "Trivia Pedagógica" and st.session_state.pantalla_selec
 
 # Pantalla de bienvenida
 if st.session_state.pantalla_seleccionada == "Panel Principal":
-    st.title("Bienvenido a la Trivia Pedagógica 🎓")
+    st.title("Interescolar ICOM 2025")
+    st.title("Trivia Pedagógica 🎓")
     
     st.markdown("""
     <div style="text-align: center; font-size: 24px; padding: 20px; border: 2px solid #1976D2; background-color: #E3F2FD; border-radius: 10px; color: #0D47A1;">
-        💡 Pon a prueba tus conocimientos en pedagogía.<br>
-        Selecciona "Trivia Pedagógica" en el menú lateral para comenzar.
+        💡 <strong>Pon a prueba tus conocimientos en pedagogía.</strong><br><br>
+        30 preguntas, 1 punto por pregunta.<br><br>
+        Cada pregunta dispone de un tiempo máximo de 15 segundos para ser respondida.<br><br> 
+        El temporizador no cambia con el transcurso del tiempo, sin embargo el tiempo sí transcurre.<br><br>
+        <strong>Una vez terminados los 15 segundos, la pregunta pierde su valor (1 punto) el cual ya no se sumará al puntaje total del plantel aunque la pregunta se responda correctamente.</strong><br><br>
     </div>
     """, unsafe_allow_html=True)
     
-    st.image("https://www.uclm.es/-/media/Images/C01-Centros/Fac-Educacion-Albacete/Noticias/2021/trivia.ashx", use_container_width=True)
+    st.image("https://somich.cl/wp-content/uploads/2025/01/web.jpg", use_container_width=True)
 
 # Pantalla de trivia pedagógica
 elif st.session_state.pantalla_seleccionada == "Trivia Pedagógica":
@@ -90,7 +130,12 @@ elif st.session_state.pantalla_seleccionada == "Trivia Pedagógica":
         pregunta, opciones, respuesta_correcta = preguntas[st.session_state.pregunta_actual]
         st.title("Trivia Pedagógica")
 
+        # Mostrar el número de la pregunta en texto pequeño antes de la pregunta
         st.markdown(f"""
+            <div style="font-size: 14px; text-align: left; color: #757575;">
+                Pregunta {len(preguntas) - len(st.session_state.preguntas_restantes)}/{len(preguntas)}
+            </div>
+
             <div style="text-align: center; font-size: 35px; font-weight: bold; padding: 10px; border: 2px solid #1976D2; background-color: #E3F2FD; border-radius: 10px; color: #0D47A1;">
                 {pregunta}
             </div>
@@ -98,7 +143,7 @@ elif st.session_state.pantalla_seleccionada == "Trivia Pedagógica":
 
         # Mostrar el temporizador en el panel lateral solo si la trivia ha comenzado
         if st.session_state.cronometro_iniciado:
-            tiempo_restante = max(0, 15 - int(time.time() - st.session_state.tiempo_inicio))
+            tiempo_restante = max(0, 17 - int(time.time() - st.session_state.tiempo_inicio))
             st.sidebar.header("⏳ Tiempo restante:")
             st.sidebar.write(f"**{tiempo_restante} segundos**")
 
