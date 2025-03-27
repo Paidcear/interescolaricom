@@ -119,10 +119,17 @@ elif st.session_state.pantalla_seleccionada == "Trivia Pedagógica":
         plantel_ganador = max(st.session_state.puntajes, key=st.session_state.puntajes.get)
         max_puntos = st.session_state.puntajes[plantel_ganador]
         
+        # Verificar si hay empate
+        planteles_ganadores = [plantel for plantel, puntos in st.session_state.puntajes.items() if puntos == max_puntos]
+        
+        if len(planteles_ganadores) > 1:
+            resultado = f"¡Es un empate entre los siguientes planteles: {', '.join(planteles_ganadores)}!"
+        else:
+            resultado = f"¡Felicidades, {plantel_ganador}! 🏆 Han ganado la trivia con {max_puntos} puntos."
+
         st.markdown(f"""
             <div style="border: 2px solid #4CAF50; padding: 20px; border-radius: 10px; text-align: center; background-color: #F0FFF0; color: #2E7D32; font-size: 24px; font-weight: bold;">
-                🏆 ¡Felicidades, {plantel_ganador}! 🏆<br>
-                Han ganado la trivia con {max_puntos} puntos.
+                {resultado}
             </div>
         """, unsafe_allow_html=True)
     
