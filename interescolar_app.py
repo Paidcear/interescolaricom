@@ -150,7 +150,7 @@ elif st.session_state.pantalla_seleccionada == "Trivia Pedagógica":
 
         # Mostrar el temporizador en el panel lateral solo si la trivia ha comenzado
         if st.session_state.cronometro_iniciado:
-            tiempo_restante = max(0, 17 - int(time.time() - st.session_state.tiempo_inicio))
+            tiempo_restante = max(0, 20 - int(time.time() - st.session_state.tiempo_inicio))
             st.sidebar.header("⏳ Tiempo restante:")
             st.sidebar.write(f"**{tiempo_restante} segundos**")
 
